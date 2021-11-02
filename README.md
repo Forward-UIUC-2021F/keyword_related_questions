@@ -4,7 +4,7 @@
 This module will generate a list of the best questions related to some given keyword.
 
 ## Functional Design
-```
+``` python
 def generate_keyword_questions(keyword):
   '''
     This functions generates a list of questions that contains the given keyword.
@@ -41,10 +41,12 @@ def best_keyword_questions(keyword):
    return [top_keyword_questions]
 ```
 ## Algorithmic Design
-###(WIP) Load data:
+### Load data:
 - (Manual) Send data from my own machine to machines
 - Load XML file into elastic search
-###Parse data
+
+
+### Parse data
 Generate
 - Looking at each entry
 - Check if the entry contains the given keyword
