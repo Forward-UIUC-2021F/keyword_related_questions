@@ -42,24 +42,21 @@ def best_keyword_questions(keyword):
 ```
 ## Algorithmic Design
 ### Load data:
-- (Manual) Send data from my own machine to machines
+- (Manual) secure copy unzipped data from my machine to machines
 - Load XML file into elastic search
 
 
 ### Parse data
-Generate
-- Looking at each entry
-- Check if the entry contains the given keyword
-- If it contains the keyword, add it to dictionary where the question is key and #upvotes are values
+#### Generate keyword questions
+- For each entry that contains the keyword, add entry to dictionary where the question is key and #upvotes are values
+- Return dictionary
+
+#### Filter keyword questions
+- For each key in the dictionary, consider the syntactic position of the keyword using dependency parsing
+- If the position of the keyword is NOT relatively close to the root, delete entry
 - Repeat until each entry is considered
 - Return dictionary
 
-- Considering the elements in the dictionary
-- For each element,
-- Consider the syntactic position in the question using SpaCy (Dependency parsing)
-- If the syntactic position is low, delete entry
-- Repeat until each entry is considered
-- Return dictionary
-
+#### Best keyword questions
 - For every element in dictionary, find the top 5 entries
 - Return top 5 entries
