@@ -1,4 +1,16 @@
 # keyword_related_questions
+## Set-Up
+1. Go to the following link: https://archive.org/download/stackexchange
+2. Download the following file: "stackoverflow.com-Posts.7z" (17.2G)
+3. Now unzip the downloaded file and move the file into the same folder as "convert_xml_to_csv.py"
+4. Run the python file above. This converts the xml file into a csv file
+5. Open two console windows. 
+6. In the first console window, cd into elastic search folder.
+7. Run elasticsearch with "bin/elasticsearch" and check to see if server is running at "http://127.0.0.1:9200/"
+8. In the second console window, cd into kibana folder.
+9. Run kibana with "bin/kibana" and check to see if server is running at "http://127.0.0.1:5601/"
+10. Now run "main.py" to load the csv file into elastic search
+
 
 ## Overall Design
 This module will generate a list of the best questions related to some given keyword.
