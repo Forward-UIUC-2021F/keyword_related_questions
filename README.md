@@ -114,3 +114,8 @@ def best_keyword_questions(keyword):
 ## Built with
 - Elasticsearch
 - Kibana
+
+## References
+- https://aclanthology.org/P08-1082.pdf
+- https://www.iosrjournals.org/iosr-jce/papers/Vol17-issue4/Version-1/C017411728.pdf
+- https://www.youtube.com/watch?v=C-JKcMM6IXE&list=LL&index=3
