@@ -1,4 +1,10 @@
-# keyword_related_questions
+# Keyword related Questions
+The purpose of this module to efficiently generate a list of the best questions related to some given keyword.
+
+## About the Data
+- The questions are derived from the posts of StackExchange. More specifically, the titles.
+- This data is then indexed into Elasticsearch and Kibana is used to retrieve the results.
+
 ## Set-Up
 1. Go to the following link: https://archive.org/download/stackexchange
 2. Download the following file: "stackoverflow.com-Posts.7z" (17.2G)
@@ -14,11 +20,9 @@
 12. Run elasticsearch with "bin/elasticsearch" and check to see if server is running at "http://127.0.0.1:9200/"
 13. In the second console window, cd into kibana folder.
 14. Run kibana with "bin/kibana" and check to see if server is running at "http://127.0.0.1:5601/"
-15. Now run "main.py" to load the csv file into elastic search
-
-
-## Overall Design
-This module will generate a list of the best questions related to some given keyword.
+15. Now run "main.py" to load the csv file into elastic search (ONLY DO THIS ONE TIME)
+16. Now comment line 134 in main.py and uncomment the rest of the code below line 134
+17. You may now change the keyword to whatever query you desire
 
 ## Functional Design
 ``` python
@@ -77,3 +81,17 @@ def best_keyword_questions(keyword):
 #### Best keyword questions
 - For every element in dictionary, find the top 5 entries
 - Return top 5 entries
+
+## Issues and Future Work
+- The inclusion of additional features could help for a better evaluation of a given question.
+- The inclusion described above would require another read-in to Elasticsearch which is costly.
+- The number of queries into elastic search is capped at 10,000 results. Need additional code to get # results > 10,000
+- More advanced queries built-in to Elasticsearch could be considered to evaluate better questions
+- The evaluation process for questions could be tinkered with (i.e. creating a classifier for good and bad questions)
+- The list of keywords is not currently pipelined into our main function (Solve by looping through keywords)
+- Consideration of answers to evaluate the question posed in the title but will require additional data
+- The subtitle for each post is also not considered
+
+## Built with
+- Elasticsearch
+- Kibana
