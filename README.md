@@ -24,6 +24,19 @@ The purpose of this module to efficiently generate a list of the best questions 
 16. Now comment line 134 in main.py and uncomment the rest of the code below line 134
 17. You may now change the keyword to whatever query you desire
 
+## File structure
+```
+matt-ho-keyword-related-questions/
+    - requirements.txt
+    - data/ 
+        -- Posts.csv (Create by conversion of xml to csv)
+        -- Posts.xml
+    - src/
+        -- main.py
+        -- convert_xml_to_csv.py
+    - README.md
+```
+
 ## Functional Design
 ``` python
 def generate_keyword_questions(keyword):
