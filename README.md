@@ -31,6 +31,8 @@ matt-ho-keyword-related-questions/
     - data/ 
         -- Posts.csv (Create by conversion of xml to csv)
         -- Posts.xml
+    - Elasticsearch/
+    - Kibana/
     - src/
         -- main.py
         -- convert_xml_to_csv.py
