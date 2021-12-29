@@ -38,6 +38,10 @@ matt-ho-keyword-related-questions/
         -- convert_xml_to_csv.py
     - README.md
 ```
+- Posts.csv is a file created by the conversion of Posts.xml
+- Posts.xml is the file downloaded from the archive.org linked above
+- main.py is the main file that will load the csv file into elastic search
+- convert_xml_to_csv.py is the file that converts the xml file into a csv file
 
 ## Functional Design
 ``` python
