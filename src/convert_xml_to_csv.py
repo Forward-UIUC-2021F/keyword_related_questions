@@ -18,7 +18,7 @@ class PostsHandler(xml.sax.ContentHandler):
       row = [id, score, title]
       
       # Append row to our csv file
-      with open('Posts.csv','a') as csvfile:
+      with open('data/Posts.csv','a') as csvfile:
         writer = csv.writer(csvfile)
         writer.writerow(row)
 
