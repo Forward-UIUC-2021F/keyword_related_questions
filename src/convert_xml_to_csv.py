@@ -36,6 +36,6 @@ def load_data(file):
   parser.parse(file)
 
 def main():
-  load_data("Posts.xml")
+  load_data("data/Posts.xml")
   print("--- %s seconds ---" % (time.time() - start_time))
 main()
