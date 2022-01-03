@@ -131,7 +131,7 @@ def filter_keyword_questions(keyword, questions):
 def main():
   print("Loading in data...")
   # for future self: have a way to auto upload data and not repeat
-  load_data("Posts.csv")
+  load_data("data/Posts.csv")
   print("Done")
   # keyword = "beer"
   # questions = generate_keyword_questions(keyword)
