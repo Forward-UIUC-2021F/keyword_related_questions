@@ -101,6 +101,10 @@ def best_keyword_questions(keyword):
 - For every element in dictionary, find the top 5 entries
 - Return top 5 entries
 
+## Demo Video
+https://user-images.githubusercontent.com/47504662/148722490-171b7275-a815-4eb8-8411-5f8d56a2182f.mp4
+
+
 ## Issues and Future Work
 - The inclusion of additional features could help for a better evaluation of a given question.
 - The inclusion described above would require another read-in to Elasticsearch which is costly.
