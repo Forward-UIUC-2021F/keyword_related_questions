@@ -104,6 +104,41 @@ def best_keyword_questions(keyword):
 ## Demo Video
 https://user-images.githubusercontent.com/47504662/148722490-171b7275-a815-4eb8-8411-5f8d56a2182f.mp4
 
+## Sample output
+###"tree"
+- Given two directory trees, how can I find out which files differ by content?
+- Explain Merkle Trees for use in Eventual Consistency
+- What are Expression Trees, how do you use them, and why would you use them?
+- Creating JSON arrays in Boost using Property Trees
+- How do I compare two source trees in Linux?
+- What should I use Clojure's finger trees for?
+- Help Understanding Cross Validation and Decision Trees
+- Understanding Ukkonen's algorithm for suffix trees
+- The possible number of binary search trees that can be created with N keys is given by the Nth catalan number. Why?
+- Why DB indexes use balanced trees, not hashtables?
+
+###"data"
+- Passing data between view controllers
+- Combine a list of data frames into one data frame by row
+- Sending POST data in Android
+- Saving an Object (Data persistence)
+- HttpServletRequest get JSON POST data
+- Read data from SqlDataReader
+- Setting a WebRequest's body data
+- Using R to download zipped data file, extract, and import data pass post data with window.location.href
+- How to write data with FileOutputStream without losing old data?
+
+###"string"
+- Converting string into datetime
+- Convert bytes to a string
+- Generate random string/characters in JavaScript
+- How to check if a string "StartsWith" another string?
+- Reverse a string in Python
+- How do I check if a string contains another string in Objective-C?
+- Trim string in JavaScript?
+- Converting 'ArrayList<String> to 'String[]' in Java
+- Converting integer to string in Python
+- Java string to date conversion
 
 ## Issues and Future Work
 - The inclusion of additional features could help for a better evaluation of a given question.
