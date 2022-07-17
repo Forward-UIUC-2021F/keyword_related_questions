@@ -8,9 +8,15 @@ import requests
 
 import spacy
 import networkx as nx
+import matplotlib.pyplot as plt
 
 from elasticsearch import Elasticsearch
 from elasticsearch import helpers
+
+import pdb 
+import json
+
+import sys
 
 # Given a xml file, will load in the data into elasticsearch
 def load_data(file):
@@ -26,6 +32,12 @@ def load_data(file):
   # Convert data into dictionary
   df2 = df.to_dict('records')
   print("converted dataframe to dictionary")
+
+  # for c, line in enumerate(df2):
+  #   print(line.get("title", ""))
+  #   print(line.get("score", ""))
+  #   return
+
   # Loads in dictionary into elasticsearch
   try:
     res = helpers.bulk(es, generator(df2))
@@ -45,7 +57,7 @@ def generator(df2):
         '_id': c,
         '_source': {
                 'title': line.get("title", ""),
-                'score': line.get("score", ""),
+                'votes': line.get("score", ""),
         }
       }
     raise StopIteration
@@ -57,24 +69,31 @@ def generate_keyword_questions(keyword):
 
   # Note: The size of data is capped at 10,000. Must implement paging to return reults
   #   See: https://stackoverflow.com/questions/8829468/elasticsearch-query-to-return-all-records
-  data = '\n{\n  "_source": ["title","score"],\n  "size": 10000,\n  "query": {\n    "match_phrase": {\n      "title": "keyword"\n    }\n  }\n}'.replace("keyword",keyword)
+  data = '\n{\n  "_source": ["title","votes"],\n  "size": 10000,\n  "query": {\n    "match_phrase": {\n      "title": "keyword"\n    }\n  }\n}'.replace("keyword", keyword)
+
+  # print(data)
 
   # GET request from elasticsearch for a keyword
-  req = requests.get('http://localhost:9200/posts/_search', headers=headers, data=data)
+  req = requests.get('http://localhost:9200/cs/_search', headers=headers, data=data)
   
   # if request is not valid
   if req.status_code != 200:
     # do nothing
+    print("Error with query")
+
+    print(req)
+    pdb.set_trace()
     return
 
   # Otherwise, we got hits!
   hits = req.json()['hits']['hits']
+  # pdb.set_trace()
 
   # Save hits into dictionary
   dict = {}
   for hit in hits:
       source = hit["_source"]
-      dict[source["title"]] = source["score"]
+      dict[source["title"]] = source["votes"]
   return dict
 
 # filter out questions given a specific keyword
@@ -122,22 +141,47 @@ def filter_keyword_questions(keyword, questions):
       if root.text.lower() == node.split("-")[0] and len(head) == 0:
         head = node
     # https://networkx.github.io/documentation/networkx-1.10/reference/algorithms.shortest_paths.html
-    d = nx.shortest_path_length(graph, source=head, target=tail)
+    # pdb.set_trace()
+    # print()
+    # gdraw = nx.draw(graph)
+    # print(gdraw)
 
-    length = len(doc)
+    try:
+      d = nx.shortest_path_length(graph, source=head, target=tail)
+
+      length = len(doc)
+      dict[question] = questions[question] * (1 - (d/length))
+      # print("Shortest path success!")
+    except:
+      # nx.draw(graph)
+      # plt.show()
+      dict[question] = questions[question] * 0.01
+      continue
+
+    # length = len(doc)
     # we modify the score of the sentence to benefit questions that have a keyword close to root
-    dict[question] = questions[question] * (1 - (d/length))
+    # dict[question] = questions[question] * (1 - (d/length))
   return dict
+
+def get_top_questions(keyword, k=10):
+  questions = generate_keyword_questions(keyword)
+  # return list(questions.keys())
+  filtered_questions = filter_keyword_questions(keyword,questions)
+  sort = sorted(filtered_questions, key=filtered_questions.get, reverse=True)[:k]
+
+  return sort
+
+
 def main():
-  print("Loading in data...")
   # for future self: have a way to auto upload data and not repeat
-  load_data("data/Posts.csv")
-  print("Done")
-  # keyword = "beer"
-  # questions = generate_keyword_questions(keyword)
-  # filtered_questions = filter_keyword_questions(keyword,questions)
-  # sort = sorted(filtered_questions, key=filtered_questions.get, reverse=True)[:10]
-  # print(sort)
+  # print("Loading in data...")
+  # load_data("/scratch/aukey2/Posts.csv")
+  # print("Done")
+
+  # keyword = "tree"
+  keyword = sys.argv[1]
+  questions = get_top_questions(keyword)
+  print(json.dumps(questions))
 
 if __name__ == "__main__":
     main()

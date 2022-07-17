@@ -9,6 +9,7 @@ The purpose of this module to efficiently generate a list of the best questions 
 1. Go to the following link: https://archive.org/download/stackexchange
 2. Download the following file: "stackoverflow.com-Posts.7z" (17.2G)
 3. Now unzip the downloaded file and move the file into the folder "data"
+4. Rename `.env.template` to `.env` and specify the path to the data directory
 4. Run the python file above. This converts the xml file into a csv file
 5. Go to the following link: https://www.elastic.co/downloads/elasticsearch
 6. Choose the platform for your device and download Elasticsearch

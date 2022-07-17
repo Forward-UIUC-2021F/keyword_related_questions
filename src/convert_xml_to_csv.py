@@ -3,6 +3,15 @@ import csv
 import time
 start_time = time.time()
 
+import os
+
+# pip install python-dotenv
+from dotenv import load_dotenv
+load_dotenv('../.env')
+
+data_root_dir = os.getenv('DATA_DIR')
+
+
 # Reads the xml file using Simple API for XML (SAX)
 class PostsHandler(xml.sax.ContentHandler):  
   def startElement(self, tag, attributes):
@@ -18,7 +27,7 @@ class PostsHandler(xml.sax.ContentHandler):
       row = [id, score, title]
       
       # Append row to our csv file
-      with open('data/Posts.csv','a') as csvfile:
+      with open(f"{data_root_dir}/Posts.csv",'a') as csvfile:
         writer = csv.writer(csvfile)
         writer.writerow(row)
 
@@ -36,6 +45,6 @@ def load_data(file):
   parser.parse(file)
 
 def main():
-  load_data("data/Posts.xml")
+  load_data(f"{data_root_dir}/Posts.xml")
   print("--- %s seconds ---" % (time.time() - start_time))
 main()
